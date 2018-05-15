@@ -43,18 +43,26 @@
 <div class="row">
 <div class="col-md-3">
     
+    <div class="input-group">
+        <input v-model="studentId" type="text" class="form-control" id="studentId" placeholder="Student ID"><span>
+        
+        <div class="input-group-append">
+        
+            <button @click="searchById" type="submit"  data-toggle="modal" data-target="#exampleModal2" class="btn btn-outline-secondary">Search</button>
+       
+        </div>
+      </div>
  
-        <input v-model="studentId" type="text" class="form-control" id="studentId" placeholder="Student ID">
-        <button @click="searchById" type="submit"  data-toggle="modal" data-target="#exampleModal2" class="btn btn-primary mb-2">Search</button>
+       
 </div>
-<div class="col-md-3">
+<div class="col-md-4">
 
 </div>
-<div class="col-md-3">
+<div class="col-md-4">
   
   </div>
   
-<div class="col-md-3">
+<div class="col-md-1">
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
         <i class="material-icons">
             person_add
@@ -63,11 +71,22 @@
     </div>
 </div>
 <div >
+  <hr>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+        <ul class="list-group">
+            <div v-for="student in students"> 
+                 
+                   <li class="list-group-item">{{student.name}}</li>
+                  
+              </div>
+            </ul>
+            
 
-    <div v-for="student in students"> 
-        <h6>{{student.name}}</h6>
     </div>
-
+  </div>  
+  </div>
 </div>
 <!-- Button trigger modal -->
 
@@ -117,7 +136,9 @@
           <div class="modal-body">
               <form>
                   <div class="form-group">
-                    <label for="studentName">{{myStudent}}</label>
+                    <label for="studentName">Roll No: &nbsp;</label>{{myStudent.id}}
+                    <br>
+                    <label for="studentName">Name:  &nbsp;</label>{{myStudent.name}}
                    
                   </div>
                 </form>
