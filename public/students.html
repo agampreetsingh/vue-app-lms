@@ -78,7 +78,10 @@
         <ul class="list-group">
             <div v-for="student in students"> 
                  
-                   <li class="list-group-item">{{student.name}}</li>
+                   <li class="list-group-item list-group-item-action">
+                    {{student.id}}.
+                    &nbsp 
+                    {{student.name}}</li>
                   
               </div>
             </ul>
