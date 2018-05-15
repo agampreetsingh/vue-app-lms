@@ -16,5 +16,14 @@ route.get('/subjects',(request,response)=>{
 })
 
 
+route.get('/courses',(request,response)=>{
+  response.sendFile('courses.html',{root:'./public'});
+})
+
+route.get('/courses/:id/batches',(request,response)=>{
+  response.sendFile('batches.html',{root:'./public'});
+})
+
+
 module.exports=route;
 

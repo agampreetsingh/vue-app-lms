@@ -23,12 +23,12 @@
     <nav class="navbar navbar-light bg-light">
         <span class="navbar-brand mb-0 h1">LMS</span>
         <span class="navbar-text">        
-            <a class="navbar-link" href="/students"><i class="material-icons" style="font-size: 30px">face</i></a>
-            &nbsp;
-            <a class="navbar-link" href="/teachers"><i class="material-icons" style="font-size: 30px">supervisor_account</i></a>
-            &nbsp;
-            <a class="navbar-link" href="/subjects"><i class="material-icons" style="font-size: 30px">library_books</i></a>
-</span>
+                    <a class="navbar-link" href="/students"><i class="material-icons" style="font-size: 30px">face</i></a>
+                    &nbsp;
+                    <a class="navbar-link" href="/teachers"><i class="material-icons" style="font-size: 30px">supervisor_account</i></a>
+                    &nbsp;
+                    <a class="navbar-link" href="/subjects"><i class="material-icons" style="font-size: 30px">library_books</i></a>
+        </span>
     </nav>
 <br>
 <br>
@@ -36,7 +36,7 @@
 <div id="app" class="container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page">/Teachers</li>
+                <li class="breadcrumb-item active" aria-current="page">/Courses</li>
           
         </ol>
       </nav>
@@ -44,7 +44,7 @@
 <div class="col-md-3">
     
     <div class="input-group">
-        <input v-model="teacherId" type="text" class="form-control" id="teacherId" placeholder="Teacher ID"><span>
+        <input v-model="courseId" type="text" class="form-control" id="teacherId" placeholder="Course ID"><span>
         
         <div class="input-group-append">
         
@@ -64,32 +64,36 @@
   
 <div class="col-md-1">
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        <i class="material-icons">
-            person_add
+        <i class="material-icons"  >
+            playlist_add
             </i>
       </button>
     </div>
 </div>
-<div >
+<div>
   <hr>
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
-        <ul class="list-group">
-            <div v-for="teacher in teachers"> 
-                 
-                   <li class="list-group-item list-group-item-action">
-                    {{teacher.id}}.
-                    &nbsp 
-                    {{teacher.name}}</li>
-                  
-              </div>
-            </ul>
             
-
-    </div>
+              <div v-for="course in courses" class="col-md-3"> 
+                 
+                <div class="card">
+                      <div class="card-header">
+                        {{course.id}}
+                      </div>
+                      <div class="card-body">
+                        <h5 class="card-title">{{course.name}}</h5>
+                        <p class="card-text">A course specially designed for you on {{course.name}} and it's implementations...</p>
+                        <a href="/batches" class="btn btn-info">View Batches</a>
+                      </div>
+                    </div>
+            <br>
+                  
+    
+          </div>
+          
   </div>  
-  </div>
+  
 </div>
 <!-- Button trigger modal -->
 
@@ -99,7 +103,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add Teacher</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Add course</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -107,16 +111,10 @@
         <div class="modal-body">
             <form>
                 <div class="form-group">
-                  <label for="teacherName">Name</label>
-                  <input v-model="name" type="email" class="form-control" id="teacherName" aria-describedby="nameHelp" placeholder="Enter name">
-                  <small id="nameHelp" class="form-text text-muted">Add a new teacher to the School</small>
+                  <label for="courseName">Name</label>
+                  <input v-model="name" type="email" class="form-control" id="courseName" aria-describedby="nameHelp" placeholder="Enter name">
+                  <small id="nameHelp" class="form-text text-muted">Add a new course to the School</small>
 
-                  <label class="my-1 mr-2" for="subjectsOption">Subject</label>
-                  <select v-model="selected"  class="custom-select my-1 mr-sm-2" id="subjectsOption">
-                  
-                  <option v-for="subject in subjects" v-bind:value="subject.id">{{subject.name}}</option>
-    
-  </select>
                 </div>
               </form>
         </div>
@@ -129,7 +127,7 @@
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           
           <div>
-              <button type="button" class="btn btn-primary" @click="addTeacher">Add</button>
+              <button type="button" class="btn btn-primary" @click="addCourse">Add</button>
             </div>
         </div>
       </div>
@@ -140,7 +138,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Teacher</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Course</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -148,9 +146,9 @@
           <div class="modal-body">
               <form>
                   <div class="form-group">
-                    <label for="teacherName">Teacher ID: &nbsp;</label>{{myTeacher.id}}
+                    <label for="teacherName">Course ID: &nbsp;</label>{{myCourse.id}}
                     <br>
-                    <label for="teacherName">Name:  &nbsp;</label>{{myTeacher.name}}
+                    <label for="teacherName">Name:  &nbsp;</label>{{myCourse.name}}
                    
                   </div>
                 </form>
@@ -165,50 +163,44 @@
 
 
 </div>
+</div>
 
 <script>
   let app=new Vue({
     el:'#app',
     data: {
-      teachers:[],
-      subjects:[],
-      selected: '',
+      courses:[],
       name: '',
       message: '',
-      teacherId: '',
-      myTeacher: ''
+      courseId: '',
+      myCourse: ''
     },
     created: function(){
-      this.getTeachers(),
-      this.getSubjects()
+      this.getCourses()
     },
     methods:{
-      getTeachers: function(){
+      getCourses: function(){
         let app=this;
-        axios.get('http://localhost:5555/api/teachers').then((response)=>app.teachers=response.data)
-      },
-      getSubjects: function(){
-        let app=this;
-        axios.get('http://localhost:5555/api/subjects').then((response)=>app.subjects=response.data)
+        axios.get('http://localhost:5555/api/courses').then((response)=>app.courses=response.data)
       },
       searchById: function(){
         let app=this;
-        axios.get('http://localhost:5555/api/teachers/'+app.teacherId).then((response)=>{
-          app.myTeacher=response.data;
+        axios.get('http://localhost:5555/api/courses/'+app.courseId).then((response)=>{
+          app.myCourse=response.data;
          
         })
       },
-      addTeacher: function(){
-        console.log(this.selected);
-        axios.post('http://localhost:5555/api/teachers',{
+      addCourse: function(){
+        
+        axios.post('http://localhost:5555/api/courses',{
           name: this.name,
-          subjectId:this.selected
+          
         }).then(()=>{
-          app.message="Teacher Added";
-          this.getTeachers();
-          app.teacherId=''; 
+          app.message="Course Added";
+          this.getCourses();
+          app.courseId=''; 
         }
-        ).catch((err)=>console.log("Cannot Add Teacher"))
+        ).catch((err)=>console.log("Cannot Add Course"))
       }
     }
   })
