@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="vue.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -30,34 +30,182 @@
                     <a class="navbar-link" href="/subjects"><i class="material-icons">library_books</i></a>
         </span>
     </nav>
-<h1>TEACHERS</h1>
+<br>
+<br>
 
+<div id="app" class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">/Teachers</li>
+          
+        </ol>
+      </nav>
+<div class="row">
+<div class="col-md-3">
+    
+    <div class="input-group">
+        <input v-model="teacherId" type="text" class="form-control" id="teacherId" placeholder="Teacher ID"><span>
         
-<div id="app">   
+        <div class="input-group-append">
+        
+            <button @click="searchById" type="submit"  data-toggle="modal" data-target="#exampleModal2" class="btn btn-outline-secondary">Search</button>
+       
+        </div>
+      </div>
 
-  <div v-for="teacher in teachers"> 
-    <h6>{{teacher.name}}</h6>
-  </div>
- 
+       
+</div>
+<div class="col-md-4">
 
 </div>
+<div class="col-md-4">
+  
+  </div>
+  
+<div class="col-md-1">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        <i class="material-icons">
+            person_add
+            </i>
+      </button>
+    </div>
+</div>
+<div >
+  <hr>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+        <ul class="list-group">
+            <div v-for="teacher in teachers"> 
+                 
+                   <li class="list-group-item list-group-item-action">
+                    {{teacher.id}}.
+                    &nbsp 
+                    {{teacher.name}}</li>
+                  
+              </div>
+            </ul>
+            
+
+    </div>
+  </div>  
+  </div>
+</div>
+<!-- Button trigger modal -->
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Teacher</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="form-group">
+                  <label for="teacherName">Name</label>
+                  <input v-model="name" type="email" class="form-control" id="teacherName" aria-describedby="nameHelp" placeholder="Enter name">
+                  <small id="nameHelp" class="form-text text-muted">Add a new teacher to the School</small>
+
+                  <label class="my-1 mr-2" for="subjectsOption">Subject</label>
+                  <select v-model="selected"  class="custom-select my-1 mr-sm-2" id="subjectsOption">
+                  <option v-for="subject in subjects" v-bind:value="subject.id">{{subject.name}}</option>
+    
+  </select>
+                </div>
+              </form>
+        </div>
+        <p>
+          {{message}}
+        </p>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          
+          <div>
+              <button type="button" class="btn btn-primary" @click="addTeacher">Add</button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Student</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <form>
+                  <div class="form-group">
+                    <label for="teacherName">ID: &nbsp;</label>{{myTeacher.id}}
+                    <br>
+                    <label for="teacherName">Name:  &nbsp;</label>{{myTeacher.name}}
+                   
+                  </div>
+                </form>
+          </div>
+          
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div> 
 
 
+</div>
 
 <script>
   let app=new Vue({
     el:'#app',
     data: {
-      teachers:[]
+      teachers:[],
+      subjects:[],
+      selected: '',
+      name: '',
+      message: '',
+      teacherId: '',
+      myTeacher: ''
     },
     created: function(){
-      this.getTeachers()
+      this.getTeachers(),
+      this.getSubjects()
     },
     methods:{
       getTeachers: function(){
         let app=this;
         axios.get('http://localhost:5555/api/teachers').then((response)=>app.teachers=response.data)
-    
+      },
+      getSubjects: function(){
+        let app=this;
+        axios.get('http://localhost:5555/api/subjects').then((response)=>app.subjects=response.data)
+      },
+      searchById: function(){
+        let app=this;
+        axios.get('http://localhost:5555/api/teachers/'+app.teacherId).then((response)=>{
+          app.myTeacher=response.data;
+         
+        })
+      },
+      addTeacher: function(){
+        console.log(this.selected);
+        axios.post('http://localhost:5555/api/teachers',{
+          name: this.name,
+          subjectId:this.selected
+        }).then(()=>{
+          app.message="Teacher Added";
+          this.getTeachers();
+          app.name='';
+        }
+        ).catch((err)=>console.log("Cannot Add Teacher"))
       }
     }
   })
