@@ -196,7 +196,7 @@
       getBatches: function(){
         let app=this;
         console.log(window.location.pathname)
-        axios.get('https://web-eval1-agam.herokuapp.com/api'+window.location.pathname).then((response)=>{
+        axios.get('http://localhost:5555/api'+window.location.pathname).then((response)=>{
           console.log(response.data)
           for(let i=0;i<response.data.length;i++)
           {
