@@ -209,11 +209,11 @@
         let app=this;
         let course=window.location.pathname.split('/')[2];
         console.log(course + 'dasasdasdasdasas ')
-        axios.get('http://localhost:5555/api/courses/'+course).then((response)=>app.course=response.data)
+        axios.get('https://web-eval1-agam.herokuapp.com/api/courses/'+course).then((response)=>app.course=response.data)
       },
       getCourses: function(){
         let app=this;
-        axios.get('http://localhost:5555/api/courses').then((response)=>app.courses=response.data)
+        axios.get('https://web-eval1-agam.herokuapp.com/api/courses').then((response)=>app.courses=response.data)
       },
       routeLectures: function(batch){
         let app=this;
@@ -223,7 +223,7 @@
       },
       searchById: function(){
         let app=this;
-        axios.get('http://localhost:5555/api'+window.location.pathname+'/'+app.batchID).then((response)=>{
+        axios.get('https://web-eval1-agam.herokuapp.com/api'+window.location.pathname+'/'+app.batchID).then((response)=>{
           
           if(response.data.name)
           app.myBatch=response.data;
@@ -233,7 +233,7 @@
       },
       addCourse: function(){
         
-        axios.post('http://localhost:5555/api/courses/'+this.selected+'/batches',{
+        axios.post('https://web-eval1-agam.herokuapp.com/api'+this.selected+'/batches',{
           name: this.name,
           
         }).then(()=>{
