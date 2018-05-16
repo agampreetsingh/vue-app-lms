@@ -24,6 +24,10 @@ route.get('/courses/:id/batches',(request,response)=>{
   response.sendFile('batches.html',{root:'./public'});
 })
 
+route.get('/courses/:c_id/batches/:b_id/lectures',(request,response)=>{
+  response.sendFile('lectures.html',{root:'./public'});
+})
+
 
 module.exports=route;
 
