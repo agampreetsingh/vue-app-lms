@@ -182,7 +182,7 @@
     methods:{
       getCourses: function(){
         let app=this;
-        axios.get('http://localhost:5555/api/courses').then((response)=>app.courses=response.data)
+        axios.get('https://web-eval1-agam.herokuapp.com/api/courses').then((response)=>app.courses=response.data)
       },
       routeBatches: function(course){
         let app=this;
