@@ -192,7 +192,7 @@
       },
       searchById: function(){
         let app=this;
-        axios.get('http://localhost:5555/api/courses/'+app.courseId).then((response)=>{
+        axios.get('https://web-eval1-agam.herokuapp.com/api/courses/'+app.courseId).then((response)=>{
           if(response.data)
           app.myCourse=response.data;
           else
@@ -201,7 +201,7 @@
       },
       addCourse: function(){
         
-        axios.post('http://localhost:5555/api/courses',{
+        axios.post('https://web-eval1-agam.herokuapp.com/api/courses',{
           name: this.name,
           
         }).then(()=>{

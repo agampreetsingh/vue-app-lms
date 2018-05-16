@@ -176,11 +176,11 @@
     methods:{
       getStudents: function(){
         let app=this;
-        axios.get('http://localhost:5555/api/students').then((response)=>app.students=response.data)
+        axios.get('https://web-eval1-agam.herokuapp.com/api/students').then((response)=>app.students=response.data)
       },
       searchById: function(){
         let app=this;
-        axios.get('http://localhost:5555/api/students/'+app.studentId).then((response)=>{
+        axios.get('https://web-eval1-agam.herokuapp.com/api/students/'+app.studentId).then((response)=>{
           
           if(response.data)
           app.myStudent=response.data;
@@ -191,7 +191,7 @@
       },
       addStudent: function(){
         console.log("HEllo");
-        axios.post('http://localhost:5555/api/students',{
+        axios.post('https://web-eval1-agam.herokuapp.com/api/students',{
           name: this.name
         }).then(()=>{
           app.message="Student Added";

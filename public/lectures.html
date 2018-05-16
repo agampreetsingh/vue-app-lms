@@ -193,7 +193,7 @@
       getLectures: function(){
         let app=this;
         console.log(window.location.pathname)
-        axios.get('http://localhost:5555/api'+window.location.pathname).then((response)=>{
+        axios.get('https://web-eval1-agam.herokuapp.com/api'+window.location.pathname).then((response)=>{
           app.lectures=response.data;
         })
       },
@@ -201,7 +201,7 @@
         let app=this;
         let course=window.location.pathname.split('/')[2];
         console.log(course + 'dasasdasdasdasas ')
-        axios.get('http://localhost:5555/api/courses/'+course).then((response)=>app.course=response.data)
+        axios.get('https://web-eval1-agam.herokuapp.com/api/courses/'+course).then((response)=>app.course=response.data)
       },
       getBatch: function(){
         let app=this;
@@ -209,14 +209,13 @@
         let ubatchId=window.location.pathname.split('/')[4];
         
         console.log(ucourseId + ' uiyutyrtytuysdasdasas '+ubatchId)
-        axios.get('http://localhost:5555/api/courses/'+ucourseId+'/batches/'+ubatchId).then((response)=>app.batch=response.data)
+        axios.get('https://web-eval1-agam.herokuapp.com/api/courses/'+ucourseId+'/batches/'+ubatchId).then((response)=>app.batch=response.data)
       },
      
       searchById: function(){
         let app=this;
-        console.log('aisi taisi '+ window.location.pathname+'/'+app.lectureID);
-
-        axios.get('http://localhost:5555/api'+window.location.pathname+'/'+app.lectureID).then((response)=>{
+       
+        axios.get('https://web-eval1-agam.herokuapp.com/api'+window.location.pathname+'/'+app.lectureID).then((response)=>{
           console.log(response.data);
           if(response.data.name)
           app.myLecture=response.data;
@@ -226,7 +225,7 @@
       },
       addLecture: function(){
         
-        axios.post('http://localhost:5555/api/courses/'+app.course.id+'/batches/'+app.batch.id+'/lectures',{
+        axios.post('https://web-eval1-agam.herokuapp.com/api/courses/'+app.course.id+'/batches/'+app.batch.id+'/lectures',{
           name: this.name,
           batchId: app.batch.id,
           courseId:app.course.id

@@ -173,11 +173,11 @@
     methods:{
       getSubjects: function(){
         let app=this;
-        axios.get('http://localhost:5555/api/subjects').then((response)=>app.subjects=response.data)
+        axios.get('https://web-eval1-agam.herokuapp.com/api/subjects').then((response)=>app.subjects=response.data)
       },
       searchById: function(){
         let app=this;
-        axios.get('http://localhost:5555/api/subjects/'+app.subjectId).then((response)=>{
+        axios.get('https://web-eval1-agam.herokuapp.com/api/subjects/'+app.subjectId).then((response)=>{
           if(response.data)
           app.mySubject=response.data;
           else
@@ -186,7 +186,7 @@
       },
       addSubject: function(){
         console.log("HEllo");
-        axios.post('http://localhost:5555/api/subjects',{
+        axios.post('https://web-eval1-agam.herokuapp.com/api/subjects',{
           name: this.name
         }).then(()=>{
           app.message="Subject Added";
