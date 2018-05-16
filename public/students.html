@@ -181,8 +181,12 @@
       searchById: function(){
         let app=this;
         axios.get('http://localhost:5555/api/students/'+app.studentId).then((response)=>{
+          
+          if(response.data)
           app.myStudent=response.data;
-         
+          else
+          app.myStudent={id:'Not Found',name:'Not Found'}
+          
         })
       },
       addStudent: function(){

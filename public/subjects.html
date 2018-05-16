@@ -178,8 +178,10 @@
       searchById: function(){
         let app=this;
         axios.get('http://localhost:5555/api/subjects/'+app.subjectId).then((response)=>{
+          if(response.data)
           app.mySubject=response.data;
-         
+          else
+          app.mySubject={id:'Not Found',name:'Not Found'}
         })
       },
       addSubject: function(){

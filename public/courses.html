@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
     <script src="vue.js"></script>
+   
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -75,7 +76,7 @@
 <div class="container">
   <div class="row">
             
-              <div v-model="selected" v-for="course in courses" class="col-md-3"> 
+              <div v-for="course in courses" class="col-md-3"> 
                  
                 <div class="card">
                       <div class="card-header">
@@ -84,14 +85,14 @@
                       <div class="card-body">
                         <h5 class="card-title">{{course.name}}</h5>
                         <p class="card-text">A course specially designed for you on {{course.name}} and it's implementations...</p>
-                        <button @click="routeBatches" class="btn btn-info" v:bind="course.id">View Batches</button>
+                        
+                        <button @click="routeBatches(course)" class="btn btn-info" value="course.id">View Batches</button>
                       </div>
                     </div>
             <br>
                   
     
-          </div>
-          
+        </div>
   </div>  
   
 </div>
@@ -171,7 +172,6 @@
     data: {
       courses:[],
       name: '',
-      selected: '',
       message: '',
       courseId: '',
       myCourse: ''
@@ -184,11 +184,19 @@
         let app=this;
         axios.get('http://localhost:5555/api/courses').then((response)=>app.courses=response.data)
       },
+      routeBatches: function(course){
+        let app=this;
+        window.location.pathname="courses/"+course.id+"/batches" ;
+
+       // axios.get('http://localhost:5555/api/courses').then((response)=>app.courses=response.data)
+      },
       searchById: function(){
         let app=this;
         axios.get('http://localhost:5555/api/courses/'+app.courseId).then((response)=>{
+          if(response.data)
           app.myCourse=response.data;
-         
+          else
+          app.myCourse={id:'Not Found',name:'Not Found'}
         })
       },
       addCourse: function(){

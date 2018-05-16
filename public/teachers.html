@@ -194,8 +194,10 @@
       searchById: function(){
         let app=this;
         axios.get('http://localhost:5555/api/teachers/'+app.teacherId).then((response)=>{
+          if(response.data)
           app.myTeacher=response.data;
-         
+          else
+          app.myTeacher={id:'Not Found',name:'Not Found'}
         })
       },
       addTeacher: function(){
